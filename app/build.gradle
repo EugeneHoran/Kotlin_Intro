@@ -11,6 +11,8 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        buildConfigField("String", "NEWS_URL", "\"${news_api_url}\"")
+        buildConfigField("String", "NEWS_KEY", "\"${news_api_key}\"")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -42,6 +44,10 @@ dependencies {
     // Arch ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$arch_version"
     annotationProcessor "android.arch.lifecycle:compiler:$arch_version"
+    // Retro
+    implementation "com.squareup.retrofit2:retrofit:$retro_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retro_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$http3_version"
 
 
     testImplementation 'junit:junit:4.12'

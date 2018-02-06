@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import eugene.com.kotlininro.Constants
+import eugene.com.kotlininro.util.Constants
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentMainBinding
 
@@ -22,7 +22,7 @@ class FragmentMain : Fragment() {
         fun newInstance(text: String): FragmentMain {
             val fragment = FragmentMain()
             val args = Bundle()
-            args.putString(Constants.ARGS_TEXT, text)
+            Bundle().putString(Constants.ARGS_TEXT, text)
             fragment.arguments = args
             return fragment
         }

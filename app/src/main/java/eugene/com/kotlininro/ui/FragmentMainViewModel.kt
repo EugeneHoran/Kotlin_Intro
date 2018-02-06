@@ -9,6 +9,7 @@ class FragmentMainViewModel : ViewModel() {
     val mutableLiveData = MutableLiveData<String>()
     init {
         mutableLiveData.value = "Hello World"
+
     }
 
 }
