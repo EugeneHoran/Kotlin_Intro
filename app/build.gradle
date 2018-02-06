@@ -7,10 +7,11 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "eugene.com.kotlininro"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        buildConfigField("Long", "TIMEOUT", "15l")
         buildConfigField("String", "NEWS_URL", "\"${news_api_url}\"")
         buildConfigField("String", "NEWS_KEY", "\"${news_api_key}\"")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     // android/support
     implementation "com.android.support:appcompat-v7:$support_version"
@@ -48,9 +49,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retro_version"
     implementation "com.squareup.retrofit2:converter-gson:$retro_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$http3_version"
-
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation project(':livelib')
 }

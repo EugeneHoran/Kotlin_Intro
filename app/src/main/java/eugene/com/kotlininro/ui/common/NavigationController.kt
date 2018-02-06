@@ -13,6 +13,8 @@ class NavigationController(fragmentManager: FragmentManager) {
     }
 
     fun navToFrag(text: String) {
-        fm.beginTransaction().replace(container, FragmentMain.newInstance(text)).commit()
+        fm.beginTransaction()
+                .replace(container, FragmentMain.newInstance(text))
+                .commit()
     }
 }

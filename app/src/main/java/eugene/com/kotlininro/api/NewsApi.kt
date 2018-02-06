@@ -1,16 +1,24 @@
 package eugene.com.kotlininro.api
 
+import android.arch.lifecycle.LiveData
 import eugene.com.kotlininro.BuildConfig
+import eugene.com.kotlininro.model.api.RssResponse
+import eugene.com.livelib.ApiResponse
+import eugene.com.livelib.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface NewsApi {
 
+    @GET("v1/api.json")
+    fun getNews(@Query("rss_url") url: String): LiveData<ApiResponse<RssResponse>>
+
     companion object Factory {
-        private val TIMEOUT: Long = 15
 
         fun create(): NewsApi {
             return retrofit().create(NewsApi::class.java)
@@ -20,16 +28,16 @@ interface NewsApi {
             val builder = Retrofit.Builder()
             builder.baseUrl(BuildConfig.NEWS_URL)
             builder.addConverterFactory(GsonConverterFactory.create())
-//            builder.addCallAdapterFactory(new LiveDataCallAdapterFactory())
+            builder.addCallAdapterFactory(LiveDataCallAdapterFactory())
             builder.client(http3Client())
             return builder.build()
         }
 
         private fun http3Client(): OkHttpClient {
             val builder = OkHttpClient.Builder()
-            builder.connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            builder.writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-            builder.readTimeout(TIMEOUT, TimeUnit.SECONDS)
+            builder.connectTimeout(BuildConfig.TIMEOUT, TimeUnit.SECONDS)
+            builder.writeTimeout(BuildConfig.TIMEOUT, TimeUnit.SECONDS)
+            builder.readTimeout(BuildConfig.TIMEOUT, TimeUnit.SECONDS)
             if (BuildConfig.DEBUG) {
                 builder.addInterceptor(logger())
             }

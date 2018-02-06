@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KotlinIntro.iml" filepath="$PROJECT_DIR$/KotlinIntro.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/livelib/livelib.iml" filepath="$PROJECT_DIR$/livelib/livelib.iml" />
     </modules>
   </component>
 </project>

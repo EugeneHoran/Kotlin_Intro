@@ -5,16 +5,19 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import eugene.com.kotlininro.util.Constants
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentMainBinding
+import eugene.com.kotlininro.util.Constants
+import eugene.com.kotlininro.util.ViewModelFactory
 
 
 class FragmentMain : Fragment() {
-    private lateinit var name: String
+    private val url: String = "http://rss.cnn.com/rss/cnn_latest.rss"
+    private var name: String? = null
     private lateinit var binding: FragmentMainBinding
     private lateinit var model: FragmentMainViewModel
 
@@ -22,7 +25,7 @@ class FragmentMain : Fragment() {
         fun newInstance(text: String): FragmentMain {
             val fragment = FragmentMain()
             val args = Bundle()
-            Bundle().putString(Constants.ARGS_TEXT, text)
+            args.putString(Constants.ARGS_STATION, text)
             fragment.arguments = args
             return fragment
         }
@@ -30,8 +33,12 @@ class FragmentMain : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        name = arguments!!.getString(Constants.ARGS_TEXT)
-        model = ViewModelProviders.of(this)[FragmentMainViewModel::class.java]
+        if (arguments != null) {
+            name = arguments!!.getString(Constants.ARGS_STATION)
+        }
+        model = ViewModelProviders.of(
+                this,
+                ViewModelFactory(FragmentMainViewModel(url)))[FragmentMainViewModel::class.java]
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,13 +48,14 @@ class FragmentMain : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.text = name
-        observeString(model)
+        observeNewsResponse(model)
     }
 
-    private fun observeString(model: FragmentMainViewModel) {
-        model.mutableLiveData.observe(this, Observer<String> {
-            binding.text = it
+    private fun observeNewsResponse(model: FragmentMainViewModel) {
+        model.newsResponse.observe(this, Observer {
+            if (it?.body?.items != null) {
+                Log.e("Testing", "" + it.body?.items?.size)
+            }
         })
     }
 }
