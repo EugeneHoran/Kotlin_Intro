@@ -46,7 +46,7 @@ class RssPagerFragment : Fragment() {
     private fun observeNewsStations(model: RssPagerFragmentViewModel) {
         model.getNewsStations.observe(this, Observer {
             if (it != null) {
-                Log.e("Testing", it.size.toString())
+                Log.e("Testing", it[0].newsStationLinks?.get(0)?.url)
             }
         })
     }
