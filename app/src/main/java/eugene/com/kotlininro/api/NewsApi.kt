@@ -2,7 +2,7 @@ package eugene.com.kotlininro.api
 
 import android.arch.lifecycle.LiveData
 import eugene.com.kotlininro.BuildConfig
-import eugene.com.kotlininro.model.api.RssResponse
+import eugene.com.kotlininro.model.RssResponse
 import eugene.com.livelib.ApiResponse
 import eugene.com.livelib.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient

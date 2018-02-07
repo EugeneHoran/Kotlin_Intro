@@ -33,6 +33,7 @@ class FragmentMain : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (arguments != null) {
             name = arguments!!.getString(Constants.ARGS_STATION)
         }

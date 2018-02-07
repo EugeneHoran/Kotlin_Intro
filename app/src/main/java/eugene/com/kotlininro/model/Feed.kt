@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.model.api
+package eugene.com.kotlininro.model
 
 import com.google.gson.annotations.SerializedName
 
