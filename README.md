@@ -11,7 +11,7 @@ Note: I am leaving out DI & Rx to learn the core fundementals. Once the project 
 Kotlin Stages:
 - ~~Retrofit, Http3, and custom LiveLib (Will be converting this to Kotlin as well) for Network connections..~~
   - Unit Test with Kotlin
-- ~~Room database ~~
+- ~~Room database~~
   - Unit Test with Kotlin
 - UI and Data Handling (data binding with Arch Components)
   - ViewModels, Fragmentation, RecyclerAdapters...
