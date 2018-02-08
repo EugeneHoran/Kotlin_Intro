@@ -34,9 +34,7 @@ class MainActivity : AppCompatActivity(), NewsCallbacks.FragmentCallbacks {
         }
     }
 
-    override fun initActionbar(toolbar: Toolbar) {
-        setSupportActionBar(toolbar)
-        title = null
+    override fun initNavMenu(toolbar: Toolbar) {
         toggle = ActionBarDrawerToggle(this, binding.drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         binding.drawer.addDrawerListener(toggle!!)
         toggle!!.syncState()

@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     }
 
     private var listener: NewsCallbacks.FragmentCallbacks? = null
+    private lateinit var mainActivity: AppCompatActivity
     private lateinit var window: Window
     private lateinit var model: NewsPagerFragmentViewModel
     private lateinit var binding: FragmentNewsPagerBinding
@@ -43,6 +45,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mainActivity = activity as AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window = activity!!.window
         newsPagerHelper = NewsPagerFragmentHelper()
         model = ViewModelProviders.of(this, ViewModelFactory(
@@ -58,7 +61,9 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news_pager, container, false)
-        listener!!.initActionbar(binding.toolbar)
+        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.title = null
+        listener!!.initNavMenu(binding.toolbar)
         return binding.root
     }
 

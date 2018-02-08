@@ -10,7 +10,7 @@ class NewsCallbacks {
     }
 
     interface FragmentCallbacks {
-        fun initActionbar(toolbar: Toolbar)
+        fun initNavMenu(toolbar: Toolbar)
         fun navIconColor(@ColorInt color: Int)
     }
 }
