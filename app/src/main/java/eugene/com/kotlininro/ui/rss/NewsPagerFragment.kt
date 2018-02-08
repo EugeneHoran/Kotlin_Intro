@@ -30,7 +30,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         }
     }
 
-    private var listener: NewsCallbacks? = null
+    private var listener: NewsCallbacks.FragmentCallbacks? = null
     private lateinit var window: Window
     private lateinit var model: NewsPagerFragmentViewModel
     private lateinit var binding: FragmentNewsPagerBinding
@@ -157,7 +157,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
      */
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is NewsCallbacks) {
+        if (context is NewsCallbacks.FragmentCallbacks) {
             listener = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentCallbacks")

@@ -3,10 +3,12 @@ package eugene.com.kotlininro.ui.rss
 
 import android.support.v7.widget.Toolbar
 
-interface NewsCallbacks {
+class NewsCallbacks {
     interface AdapterCallbacks {
         fun onNewsItemClicked(url: String)
     }
 
-    fun initActionbar(toolbar: Toolbar)
+    interface FragmentCallbacks {
+        fun initActionbar(toolbar: Toolbar)
+    }
 }

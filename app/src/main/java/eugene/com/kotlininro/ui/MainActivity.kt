@@ -7,7 +7,7 @@ import eugene.com.kotlininro.R
 import eugene.com.kotlininro.ui.common.NavigationController
 import eugene.com.kotlininro.ui.rss.NewsCallbacks
 
-class MainActivity : AppCompatActivity(), NewsCallbacks {
+class MainActivity : AppCompatActivity(), NewsCallbacks.FragmentCallbacks {
     private var navController: NavigationController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -10,6 +10,7 @@ class NewsStationRecyclerAdapter(private var callbacks: NewsCallbacks.AdapterCal
         RecyclerView.Adapter<NewsStationRecyclerAdapter.NewsViewHolder>() {
 
     private var newsItems = mutableListOf<Item>()
+
     fun setItems(newsItems: List<Item>) {
         this.newsItems.clear()
         this.newsItems.addAll(newsItems)
