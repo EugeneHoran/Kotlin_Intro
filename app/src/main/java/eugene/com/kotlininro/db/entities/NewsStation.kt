@@ -11,37 +11,27 @@ import java.util.*
 @Entity(tableName = "news_stations")
 data class NewsStation(
         @PrimaryKey @NonNull var id: String,
-        var show: Boolean,
         var title: String,
-        var newsStationLinks: List<NewsStationLink>,
+        var url: String,
         var newsStationView: NewsStationView) : Parcelable {
 
     @Ignore
     constructor(
             title: String,
-            newsStationLinks: List<NewsStationLink>,
+            url: String,
             newsStationView: NewsStationView) : this(
             id = UUID.randomUUID().toString(),
-            show = true,
             title = title,
-            newsStationLinks = newsStationLinks,
+            url = url,
             newsStationView = newsStationView)
 
     @Ignore
     constructor(newsStation: NewsStation) : this(
             id = newsStation.id,
-            show = newsStation.show.not(),
             title = newsStation.title,
-            newsStationLinks = newsStation.newsStationLinks,
+            url = newsStation.url,
             newsStationView = newsStation.newsStationView)
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
-        parcel.writeByte(if (show) 1 else 0)
-        parcel.writeString(title)
-        parcel.writeTypedList(newsStationLinks)
-        parcel.writeParcelable(newsStationView, flags)
-    }
 
     override fun describeContents(): Int {
         return 0
@@ -49,10 +39,16 @@ data class NewsStation(
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readByte() != 0.toByte(),
             parcel.readString(),
-            parcel.createTypedArrayList(NewsStationLink),
+            parcel.readString(),
             parcel.readParcelable(NewsStationView::class.java.classLoader))
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(title)
+        parcel.writeString(url)
+        parcel.writeParcelable(newsStationView, flags)
+    }
 
     companion object CREATOR : Parcelable.Creator<NewsStation> {
         override fun createFromParcel(parcel: Parcel): NewsStation {
@@ -63,5 +59,6 @@ data class NewsStation(
             return arrayOfNulls(size)
         }
     }
+
 
 }

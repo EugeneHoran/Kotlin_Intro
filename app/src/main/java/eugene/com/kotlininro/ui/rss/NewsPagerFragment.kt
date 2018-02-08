@@ -147,6 +147,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         if (activity != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
         }
+        listener!!.navIconColor(newsLogoAndColors.colorAccent!!)
         binding.appBar.setBackgroundColor(newsLogoAndColors.colorPrimary!!)
         binding.tabs.setSelectedTabIndicatorColor(newsLogoAndColors.colorAccent!!)
         binding.tabs.setTabTextColors(ColorUtils.setAlphaComponent(newsLogoAndColors.colorAccent!!, 180), newsLogoAndColors.colorAccent!!)
@@ -165,6 +166,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     }
 
     override fun onDetach() {
+//        listener!!.detach()
         super.onDetach()
         listener = null
     }
