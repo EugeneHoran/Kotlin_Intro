@@ -8,21 +8,23 @@ import eugene.com.kotlininro.util.ColorUtil
 import java.util.*
 
 class NewsDataGenerator {
-    private val URL_CNN_LATEST = "http://rss.cnn.com/rss/cnn_latest.rss"
-    private val URL_CNN_TOP = "http://rss.cnn.com/rss/cnn_topstories.rss"
-    private val URL_CNN_WORLD = "http://rss.cnn.com/rss/cnn_world.rss"
-    private val URL_CNN_BUSINESS = "http://rss.cnn.com/rss/money_latest.rss"
-    private val URL_CNN_POLITICS = "http://rss.cnn.com/rss/cnn_allpolitics.rss"
-    private val URL_FOX_LATEST = "http://feeds.foxnews.com/foxnews/latest?format=xml"
-    private val URL_FOX_POPULAR = "http://feeds.foxnews.com/foxnews/most-popular?format=xml"
-    private val URL_BBC_PRIMARY = "http://feeds.bbci.co.uk/news/rss.xml"
-    private val URL_BBC_SECONDARY = "http://feeds.bbci.co.uk/news/world/rss.xml"
-    private val URL_NYT_PRIMARY = "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-    private val URL_NYT_SECONDARY = "http://rss.nytimes.com/services/xml/rss/nyt/MostViewed.xml"
-    private val URL_CNBC_PRIMARY = "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-    private val URL_CNBC_SECONDARY = "https://www.cnbc.com/id/100727362/device/rss/rss.html"
-    private val URL_BREITBART = "http://feeds.feedburner.com/breitbart"
-    private val URL_THE_DAILY_BEAST = "http://rss.cnn.com/rss/cnn_latest.rss"
+    companion object {
+        private const val URL_CNN_LATEST = "http://rss.cnn.com/rss/cnn_latest.rss"
+        private const val URL_CNN_TOP = "http://rss.cnn.com/rss/cnn_topstories.rss"
+        private const val URL_CNN_WORLD = "http://rss.cnn.com/rss/cnn_world.rss"
+        private const val URL_CNN_BUSINESS = "http://rss.cnn.com/rss/money_latest.rss"
+        private const val URL_CNN_POLITICS = "http://rss.cnn.com/rss/cnn_allpolitics.rss"
+        private const val URL_FOX_LATEST = "http://feeds.foxnews.com/foxnews/latest?format=xml"
+        private const val URL_FOX_POPULAR = "http://feeds.foxnews.com/foxnews/most-popular?format=xml"
+        private const val URL_BBC_PRIMARY = "http://feeds.bbci.co.uk/news/rss.xml"
+        private const val URL_BBC_SECONDARY = "http://feeds.bbci.co.uk/news/world/rss.xml"
+        private const val URL_NYT_PRIMARY = "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+        private const val URL_NYT_SECONDARY = "http://rss.nytimes.com/services/xml/rss/nyt/MostViewed.xml"
+        private const val URL_CNBC_PRIMARY = "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        private const val URL_CNBC_SECONDARY = "https://www.cnbc.com/id/100727362/device/rss/rss.html"
+        private const val URL_BREITBART = "http://feeds.feedburner.com/breitbart"
+        private const val URL_THE_DAILY_BEAST = "http://rss.cnn.com/rss/cnn_latest.rss"
+    }
 
     fun getInitNewsStationList(): List<NewsStation> {
         val newsList = ArrayList<NewsStation>()
@@ -45,7 +47,7 @@ class NewsDataGenerator {
 
     private fun cnn(): NewsStation {
         val links = ArrayList<NewsStationLink>()
-        links.add(NewsStationLink(0, "Latest Stories", URL_CNN_LATEST, true))
+        links.add(NewsStationLink(0, "Latest Stories", Companion.URL_CNN_LATEST, true))
         links.add(NewsStationLink(1, "Top Stories", URL_CNN_TOP))
         links.add(NewsStationLink(2, "World Stories", URL_CNN_WORLD))
         links.add(NewsStationLink(3, "Business", URL_CNN_BUSINESS))

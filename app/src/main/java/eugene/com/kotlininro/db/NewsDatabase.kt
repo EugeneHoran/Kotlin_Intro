@@ -10,7 +10,7 @@ import eugene.com.kotlininro.db.dao.NewsDao
 import eugene.com.kotlininro.db.entities.NewsStation
 import eugene.com.kotlininro.util.ioThread
 
-@Database(entities = arrayOf(NewsStation::class), version = 1, exportSchema = false)
+@Database(entities = [NewsStation::class], version = 1, exportSchema = false)
 @TypeConverters(NewsTypeConverters::class)
 abstract class NewsDatabase : RoomDatabase() {
 
@@ -20,23 +20,19 @@ abstract class NewsDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: NewsDatabase? = null
 
-        fun getInstance(context: Context): NewsDatabase =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-                }
+        fun getInstance(context: Context): NewsDatabase = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+        }
 
         private fun buildDatabase(context: Context): NewsDatabase {
-            return Room.databaseBuilder(context, NewsDatabase::class.java, "news.rss.db")
-                    .addCallback(
-                            object : Callback() {
-                                override fun onCreate(db: SupportSQLiteDatabase) {
-                                    super.onCreate(db)
-                                    ioThread {
-                                        getInstance(context).getNewsDao().insertData(NewsDataGenerator().getInitNewsStationList())
-                                    }
-                                }
-                            }
-                    ).build()
+            return Room.databaseBuilder(context, NewsDatabase::class.java, "news.rss.db").addCallback(object : Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    ioThread {
+                        getInstance(context).getNewsDao().insertNewsList(NewsDataGenerator().getInitNewsStationList())
+                    }
+                }
+            }).build()
         }
     }
 }

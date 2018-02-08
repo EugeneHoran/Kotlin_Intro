@@ -3,7 +3,7 @@ package eugene.com.kotlininro.ui.common
 import android.support.v4.app.FragmentManager
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.ui.FragmentMain
-import eugene.com.kotlininro.ui.rss.RssPagerFragment
+import eugene.com.kotlininro.ui.rss.NewsPagerFragment
 
 class NavigationController(fragmentManager: FragmentManager) {
     private var fm: FragmentManager = fragmentManager
@@ -11,7 +11,7 @@ class NavigationController(fragmentManager: FragmentManager) {
 
     fun navToPagerFragment() {
         fm.beginTransaction()
-                .replace(container, RssPagerFragment.newInstance())
+                .replace(container, NewsPagerFragment.newInstance())
                 .commit()
     }
 

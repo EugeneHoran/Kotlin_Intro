@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="eugene.com.kotlininro.model.Item" />
+    </data>
+
+    <!--
+        android:onClick="@{() -> listener.onLinkClicked(item.link)}"
+        -->
+    <RelativeLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/image"
+            imageUrl="@{item.testingImageUrl}"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/image"
+            android:layout_toStartOf="@+id/image"
+            android:fontFamily="sans-serif-medium"
+            android:text="@{item.title}"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_toLeftOf="@+id/image"
+            android:layout_toStartOf="@+id/image"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@{item.description}"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</layout>

@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,12 +32,10 @@ class FragmentMain : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (arguments != null) {
             name = arguments!!.getString(Constants.ARGS_STATION)
         }
-        model = ViewModelProviders.of(
-                this,
+        model = ViewModelProviders.of(this,
                 ViewModelFactory(FragmentMainViewModel(url)))[FragmentMainViewModel::class.java]
     }
 
@@ -55,7 +52,7 @@ class FragmentMain : Fragment() {
     private fun observeNewsResponse(model: FragmentMainViewModel) {
         model.newsResponse.observe(this, Observer {
             if (it?.body?.items != null) {
-                Log.e("Testing", "" + it.body?.items?.size)
+                // TODO
             }
         })
     }
