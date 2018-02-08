@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlHardcoded">
 
     <data>
+
+        <variable
+            name="listener"
+            type="eugene.com.kotlininro.ui.rss.NewsCallbacks.AdapterCallbacks" />
 
         <variable
             name="item"
             type="eugene.com.kotlininro.model.Item" />
     </data>
 
-    <!--
-        android:onClick="@{() -> listener.onLinkClicked(item.link)}"
-        -->
     <RelativeLayout
         android:id="@+id/parent"
         android:layout_width="match_parent"
@@ -18,6 +21,7 @@
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{() -> listener.onNewsItemClicked(item.link)}"
         android:padding="16dp">
 
         <ImageView
@@ -53,5 +57,4 @@
             android:text="@{item.description}"
             android:textSize="14sp" />
     </RelativeLayout>
-
 </layout>

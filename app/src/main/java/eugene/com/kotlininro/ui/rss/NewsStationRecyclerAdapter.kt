@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import eugene.com.kotlininro.databinding.RecyclerNewsItemBinding
 import eugene.com.kotlininro.model.Item
 
-class NewsStationRecyclerAdapter : RecyclerView.Adapter<NewsStationRecyclerAdapter.NewsViewHolder>() {
+class NewsStationRecyclerAdapter(private var callbacks: NewsCallbacks.AdapterCallbacks) :
+        RecyclerView.Adapter<NewsStationRecyclerAdapter.NewsViewHolder>() {
+
     private var newsItems = mutableListOf<Item>()
     fun setItems(newsItems: List<Item>) {
         this.newsItems.clear()
@@ -14,16 +16,17 @@ class NewsStationRecyclerAdapter : RecyclerView.Adapter<NewsStationRecyclerAdapt
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
-        return NewsViewHolder(RecyclerNewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder = NewsViewHolder(
+            RecyclerNewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) = holder.bindNews(newsItems[position])
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) = holder
+            .bindNews(newsItems[position], callbacks)
 
     override fun getItemCount() = newsItems.size
 
     class NewsViewHolder(private var binding: RecyclerNewsItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindNews(item: Item) {
+        fun bindNews(item: Item, listener: NewsCallbacks.AdapterCallbacks) {
+            binding.listener = listener
             binding.item = item
         }
     }

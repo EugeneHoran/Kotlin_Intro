@@ -22,6 +22,14 @@ import eugene.com.kotlininro.db.entities.NewsStationView
 import eugene.com.kotlininro.util.ViewModelFactory
 
 class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabLayout.OnTabSelectedListener {
+    companion object {
+        private const val STATE_PAGER_PAGE = "saved_state_pager_page"
+        private const val STATE_APP_BAR_EXPANDED = "saved_state_app_bar_expanded"
+        fun newInstance(): NewsPagerFragment {
+            return NewsPagerFragment()
+        }
+    }
+
     private var listener: NewsCallbacks? = null
     private lateinit var window: Window
     private lateinit var model: NewsPagerFragmentViewModel
@@ -32,15 +40,6 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     private var appBarIsExpanded = true
     private var logos: IntArray? = null
     internal var swipeRightOffset: Float = 0.toFloat()
-
-
-    companion object {
-        private const val STATE_PAGER_PAGE = "saved_state_pager_page"
-        private const val STATE_APP_BAR_EXPANDED = "saved_state_app_bar_expanded"
-        fun newInstance(): NewsPagerFragment {
-            return NewsPagerFragment()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
