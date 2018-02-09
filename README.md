@@ -36,7 +36,6 @@ ext.http3_version = '3.9.0'
 ext.glide_version = '4.5.0'
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     // android/support
     implementation "com.android.support:appcompat-v7:$support_version"
@@ -45,7 +44,6 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_version"
     implementation "com.android.support:customtabs:$support_version"
     implementation "com.android.support:support-vector-drawable:$support_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     // Kotlin
     kapt "com.android.databinding:compiler:$gradle_version"
     // Arch ViewModel, LiveData and Room
@@ -62,11 +60,6 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     // Live Lib
     implementation project(':livelib')
-
-    // TEST
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
 ```
