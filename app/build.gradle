@@ -13,7 +13,6 @@ android {
         versionName "1.0"
         buildConfigField("Long", "TIMEOUT", "15l")
         buildConfigField("String", "NEWS_URL", "\"${news_api_url}\"")
-        buildConfigField("String", "NEWS_KEY", "\"${news_api_key}\"")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -42,7 +41,6 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_version"
     implementation "com.android.support:customtabs:$support_version"
     implementation "com.android.support:support-vector-drawable:$support_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     // Kotlin
     kapt "com.android.databinding:compiler:$gradle_version"
     // Arch ViewModel, LiveData and Room
@@ -57,9 +55,11 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation project(':livelib')
+
     // TEST
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':livelib')
 }

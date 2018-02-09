@@ -32,7 +32,9 @@ data class NewsStation(
             url = newsStation.url,
             newsStationView = newsStation.newsStationView)
 
-
+    /**
+     * Parcelable
+     */
     override fun describeContents(): Int {
         return 0
     }
@@ -59,6 +61,4 @@ data class NewsStation(
             return arrayOfNulls(size)
         }
     }
-
-
 }

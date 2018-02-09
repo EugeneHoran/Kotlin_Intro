@@ -19,7 +19,6 @@ interface NewsApi {
     fun getNews(@Query("rss_url") url: String): LiveData<ApiResponse<RssResponse>>
 
     companion object Factory {
-
         fun create(): NewsApi {
             return retrofit().create(NewsApi::class.java)
         }

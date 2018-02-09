@@ -171,7 +171,6 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     }
 
     override fun onDetach() {
-//        listener!!.detach()
         super.onDetach()
         listener = null
     }

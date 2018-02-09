@@ -54,8 +54,7 @@ data class NewsStationView(
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readValue(Int::class.java.classLoader) as? Int) {
-    }
+            parcel.readValue(Int::class.java.classLoader) as? Int)
 
     companion object CREATOR : Parcelable.Creator<NewsStationView> {
         override fun createFromParcel(parcel: Parcel): NewsStationView {

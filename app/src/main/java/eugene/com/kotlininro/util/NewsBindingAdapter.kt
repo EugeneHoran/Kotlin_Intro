@@ -25,5 +25,4 @@ object NewsBindingAdapter {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView)
     }
-
 }
