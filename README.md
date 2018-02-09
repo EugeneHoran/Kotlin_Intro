@@ -51,7 +51,7 @@ dependencies {
     kapt "com.android.databinding:compiler:$gradle_version"
     // Arch ViewModel, LiveData and Room
     implementation "android.arch.lifecycle:extensions:$arch_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$arch_version"
+    kapt "android.arch.lifecycle:compiler:$arch_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
     // Retro
@@ -60,7 +60,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$http3_version"
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
     // Live Lib
     implementation project(':livelib')
 }
