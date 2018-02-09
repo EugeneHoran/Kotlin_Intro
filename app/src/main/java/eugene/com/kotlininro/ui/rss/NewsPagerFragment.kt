@@ -2,8 +2,8 @@ package eugene.com.kotlininro.ui.rss
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingUtil
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -11,6 +11,8 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewPager
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +33,6 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         }
     }
 
-    private var listener: NewsCallbacks.FragmentCallbacks? = null
     private lateinit var mainActivity: AppCompatActivity
     private lateinit var window: Window
     private lateinit var model: NewsPagerFragmentViewModel
@@ -42,16 +43,17 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     private var appBarIsExpanded = true
     private var logos: IntArray? = null
     internal var swipeRightOffset: Float = 0.toFloat()
+    private var toggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = activity as AppCompatActivity
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window = activity!!.window
-        newsPagerHelper = NewsPagerFragmentHelper()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window = mainActivity.window
         model = ViewModelProviders.of(this, ViewModelFactory(
                 NewsPagerFragmentViewModel(
-                        NewsDatabase.getInstance(activity!!)
+                        NewsDatabase.getInstance(mainActivity)
                                 .getNewsDao())))[NewsPagerFragmentViewModel::class.java]
+        newsPagerHelper = NewsPagerFragmentHelper()
         adapter = NewsPagerAdapter(childFragmentManager)
         if (savedInstanceState != null) {
             page = savedInstanceState.getInt(STATE_PAGER_PAGE)
@@ -61,9 +63,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news_pager, container, false)
-        mainActivity.setSupportActionBar(binding.toolbar)
-        mainActivity.title = null
-        listener!!.initNavMenu(binding.toolbar)
+        setSupportActionbar()
         return binding.root
     }
 
@@ -75,6 +75,18 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         binding.tabs.addOnTabSelectedListener(this)
         binding.appBar.addOnOffsetChangedListener(this)
         observeNewsStations(model)
+    }
+
+    /**
+     * Init actionbar
+     */
+    private fun setSupportActionbar() {
+        val drawer = mainActivity.findViewById<DrawerLayout>(R.id.drawer)
+        mainActivity.setSupportActionBar(binding.toolbar)
+        mainActivity.title = null
+        toggle = ActionBarDrawerToggle(mainActivity, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle!!)
+        toggle!!.syncState()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -149,30 +161,13 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
      * Handle views based on pager scroll
      */
     private fun initColorChange(newsLogoAndColors: NewsStationView) {
-        if (activity != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
         }
-        listener!!.navIconColor(newsLogoAndColors.colorAccent!!)
+        toggle!!.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
         binding.appBar.setBackgroundColor(newsLogoAndColors.colorPrimary!!)
         binding.tabs.setSelectedTabIndicatorColor(newsLogoAndColors.colorAccent!!)
         binding.tabs.setTabTextColors(ColorUtils.setAlphaComponent(newsLogoAndColors.colorAccent!!, 180), newsLogoAndColors.colorAccent!!)
-    }
-
-    /**
-     * Init and Remove listener
-     */
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is NewsCallbacks.FragmentCallbacks) {
-            listener = context
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentCallbacks")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
     }
 
     /**
