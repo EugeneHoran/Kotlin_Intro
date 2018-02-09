@@ -1,7 +1,10 @@
 # Kotlin_Intro
-First Kotlin project.
+First Kotlin project!!!
 
-Note: I am leaving out DI & Rx to learn the core fundementals. Once the project is complete I will add DI &Rx as needed. 
+Note: I am leaving out DI & Rx to learn the core fundementals. My next project will add DI &Rx as needed. 
+
+## Opinion about Kotlin
+To start, Kotlin is amazing and can see why people are switching over. I do wish I jumped into the language sooner but was intimidated and learning MVVM and Architectural Components (which I love). It is an easy language to dive into if the programmer has a solid OO experience. At this moment, I would suggest new developers to master Java before moving to Kotlin because it is easier to comprehend and write without any Android experience(which may change the more I use Kotlin). I am happy to say that I am going to be using Kotlin from here on out. 
 
 ## Goal 
 - Get a solid understanding of Kotlin (note: so far it is amazing and I wish I converted earlier)
@@ -48,7 +51,7 @@ dependencies {
     kapt "com.android.databinding:compiler:$gradle_version"
     // Arch ViewModel, LiveData and Room
     implementation "android.arch.lifecycle:extensions:$arch_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$arch_version"
+    kapt "android.arch.lifecycle:compiler:$arch_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
     // Retro
@@ -57,7 +60,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$http3_version"
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
     // Live Lib
     implementation project(':livelib')
 }
