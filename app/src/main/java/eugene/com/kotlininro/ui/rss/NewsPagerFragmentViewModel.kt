@@ -17,13 +17,9 @@ class NewsPagerFragmentViewModel(newsDao: NewsDao) : ViewModel() {
         })
     }
 
-    fun getNews(): LiveData<List<NewsStation>> {
-        return news
-    }
+    fun getNews(): LiveData<List<NewsStation>> = news
 
-    fun getLogos(): LiveData<IntArray> {
-        return logos
-    }
+    fun getLogos(): LiveData<IntArray> = logos
 
     private fun setupData(newsList: List<NewsStation>?) {
         if (newsList == null || newsList.isEmpty()) return

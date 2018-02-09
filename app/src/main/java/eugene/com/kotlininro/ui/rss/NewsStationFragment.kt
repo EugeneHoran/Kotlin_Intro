@@ -14,9 +14,10 @@ import android.view.ViewGroup
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentNewsStationBinding
 import eugene.com.kotlininro.db.entities.NewsStation
+import eugene.com.kotlininro.ui.common.Callbacks
 import eugene.com.kotlininro.util.ViewModelFactory
 
-class NewsStationFragment : Fragment(), NewsCallbacks.AdapterCallbacks {
+class NewsStationFragment : Fragment(), Callbacks.AdapterCallbacks {
     private lateinit var newsStation: NewsStation
     private lateinit var model: NewsStationFragmentViewModel
     private lateinit var binding: FragmentNewsStationBinding

@@ -55,8 +55,20 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
-
+    // Live Lib, I converted a google sample to a library to allow api calls to return in LiveData
+    // (TODO Clean and convert)
     implementation project(':livelib')
+
+    /**
+     * Testing Kotlin Libraries
+     * Going to be leaving notes and comments in gradle for future references
+     */
+    /*
+    * Android KTX
+    * https://github.com/android/android-ktx
+    * Kotlin extensions
+    */
+//    implementation 'androidx.core:core-ktx:0.1'
 
     // TEST
     testImplementation 'junit:junit:4.12'

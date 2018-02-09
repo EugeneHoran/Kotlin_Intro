@@ -13,7 +13,13 @@ data class NewsStation(
         @PrimaryKey @NonNull var id: String,
         var title: String,
         var url: String,
-        var newsStationView: NewsStationView) : Parcelable {
+        var newsStationView: NewsStationView,
+        var show: Boolean) : Parcelable {
+
+    @Ignore
+    fun getViewType(): Int {
+        return if (show) 0 else 1
+    }
 
     @Ignore
     constructor(
@@ -23,33 +29,38 @@ data class NewsStation(
             id = UUID.randomUUID().toString(),
             title = title,
             url = url,
-            newsStationView = newsStationView)
+            newsStationView = newsStationView,
+            show = true)
 
     @Ignore
     constructor(newsStation: NewsStation) : this(
             id = newsStation.id,
             title = newsStation.title,
             url = newsStation.url,
-            newsStationView = newsStation.newsStationView)
+            newsStationView = newsStation.newsStationView,
+            show = true)
+
 
     /**
      * Parcelable
      */
-    override fun describeContents(): Int {
-        return 0
-    }
-
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readParcelable(NewsStationView::class.java.classLoader))
+            parcel.readParcelable(NewsStationView::class.java.classLoader),
+            parcel.readByte() != 0.toByte())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(title)
         parcel.writeString(url)
         parcel.writeParcelable(newsStationView, flags)
+        parcel.writeByte(if (show) 1 else 0)
+    }
+
+    override fun describeContents(): Int {
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<NewsStation> {
@@ -61,4 +72,5 @@ data class NewsStation(
             return arrayOfNulls(size)
         }
     }
+
 }

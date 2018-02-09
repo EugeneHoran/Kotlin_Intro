@@ -8,7 +8,7 @@
 
         <variable
             name="listener"
-            type="eugene.com.kotlininro.ui.rss.NewsCallbacks.AdapterCallbacks" />
+            type="eugene.com.kotlininro.ui.common.Callbacks.AdapterCallbacks" />
 
         <variable
             name="item"

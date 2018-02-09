@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="news"
+            type="eugene.com.kotlininro.db.entities.NewsStation" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        cardColor="@{news.newsStationView.colorPrimary}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/title"
+                textColor="@{news.newsStationView.colorAccent}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{news.title, default = Testing}"
+                android:textSize="16sp" />
+
+            <ImageView
+                imageInt="@{news.newsStationView.logo}"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_below="@+id/title"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@null" />
+
+            <ImageView
+                tintColor="@{news.newsStationView.colorText}"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@null"
+                app:srcCompat="@drawable/ic_check_box" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

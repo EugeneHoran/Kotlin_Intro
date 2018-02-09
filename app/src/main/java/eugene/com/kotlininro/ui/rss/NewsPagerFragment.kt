@@ -1,30 +1,26 @@
 package eugene.com.kotlininro.ui.rss
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentNewsPagerBinding
 import eugene.com.kotlininro.db.NewsDatabase
 import eugene.com.kotlininro.db.entities.NewsStationView
+import eugene.com.kotlininro.ui.common.BaseFragment
 import eugene.com.kotlininro.util.ViewModelFactory
 
-class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabLayout.OnTabSelectedListener {
+class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, TabLayout.OnTabSelectedListener {
     companion object {
         private const val STATE_PAGER_PAGE = "saved_state_pager_page"
         private const val STATE_APP_BAR_EXPANDED = "saved_state_app_bar_expanded"
@@ -33,26 +29,20 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         }
     }
 
-    private lateinit var mainActivity: AppCompatActivity
-    private lateinit var window: Window
     private lateinit var model: NewsPagerFragmentViewModel
     private lateinit var binding: FragmentNewsPagerBinding
     private lateinit var adapter: NewsPagerAdapter
     private var newsPagerHelper: NewsPagerFragmentHelper? = null
-    private lateinit var toggle: ActionBarDrawerToggle
 
     private var page: Int = 0
     private var appBarIsExpanded = true
     private var logos: IntArray? = null
     internal var swipeRightOffset: Float = 0.toFloat()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mainActivity = activity as AppCompatActivity
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) window = mainActivity.window
+    override fun onCreateFrag(savedInstanceState: Bundle?) {
         model = ViewModelProviders.of(this, ViewModelFactory(
                 NewsPagerFragmentViewModel(
-                        NewsDatabase.getInstance(mainActivity)
+                        NewsDatabase.getInstance(mainActivity!!)
                                 .getNewsDao())))[NewsPagerFragmentViewModel::class.java]
         newsPagerHelper = NewsPagerFragmentHelper()
         adapter = NewsPagerAdapter(childFragmentManager)
@@ -64,7 +54,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news_pager, container, false)
-        setSupportActionbar()
+        setSupportActionbar(binding.toolbar, true, false)
         return binding.root
     }
 
@@ -76,18 +66,6 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         binding.tabs.addOnTabSelectedListener(this)
         binding.appBar.addOnOffsetChangedListener(this)
         observeNewsStations(model)
-    }
-
-    /**
-     * Init actionbar
-     */
-    private fun setSupportActionbar() {
-        val drawer = mainActivity.findViewById<DrawerLayout>(R.id.drawer)
-        mainActivity.setSupportActionBar(binding.toolbar)
-        mainActivity.title = null
-        toggle = ActionBarDrawerToggle(mainActivity, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -161,11 +139,10 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     /**
      * Handle views based on pager scroll
      */
+    @SuppressLint("NewApi")
     private fun initColorChange(newsLogoAndColors: NewsStationView) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
-        }
-        toggle.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
+        if (isVersion21 && window != null) window!!.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
+        toggle!!.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
         binding.appBar.setBackgroundColor(newsLogoAndColors.colorPrimary!!)
         binding.tabs.setSelectedTabIndicatorColor(newsLogoAndColors.colorAccent!!)
         binding.tabs.setTabTextColors(ColorUtils.setAlphaComponent(newsLogoAndColors.colorAccent!!, 180), newsLogoAndColors.colorAccent!!)

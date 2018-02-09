@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import eugene.com.kotlininro.databinding.RecyclerNewsItemBinding
 import eugene.com.kotlininro.model.Item
+import eugene.com.kotlininro.ui.common.Callbacks
 
-class NewsStationRecyclerAdapter(private var callbacks: NewsCallbacks.AdapterCallbacks) :
+class NewsStationRecyclerAdapter(private var callbacks: Callbacks.AdapterCallbacks) :
         RecyclerView.Adapter<NewsStationRecyclerAdapter.NewsViewHolder>() {
 
     private var newsItems = mutableListOf<Item>()
@@ -26,7 +27,7 @@ class NewsStationRecyclerAdapter(private var callbacks: NewsCallbacks.AdapterCal
     override fun getItemCount() = newsItems.size
 
     class NewsViewHolder(private var binding: RecyclerNewsItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bindNews(item: Item, listener: NewsCallbacks.AdapterCallbacks) {
+        fun bindNews(item: Item, listener: Callbacks.AdapterCallbacks) {
             binding.listener = listener
             binding.item = item
         }
