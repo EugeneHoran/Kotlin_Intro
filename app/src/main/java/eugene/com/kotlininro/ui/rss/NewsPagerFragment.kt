@@ -39,11 +39,12 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
     private lateinit var binding: FragmentNewsPagerBinding
     private lateinit var adapter: NewsPagerAdapter
     private var newsPagerHelper: NewsPagerFragmentHelper? = null
+    private lateinit var toggle: ActionBarDrawerToggle
+
     private var page: Int = 0
     private var appBarIsExpanded = true
     private var logos: IntArray? = null
     internal var swipeRightOffset: Float = 0.toFloat()
-    private var toggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,8 +86,8 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         mainActivity.setSupportActionBar(binding.toolbar)
         mainActivity.title = null
         toggle = ActionBarDrawerToggle(mainActivity, drawer, binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle!!)
-        toggle!!.syncState()
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
