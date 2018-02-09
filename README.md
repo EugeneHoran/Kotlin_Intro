@@ -4,7 +4,7 @@ First Kotlin project!!!
 Note: I am leaving out DI & Rx to learn the core fundementals. My next project will add DI &Rx as needed. 
 
 ## Opinion about Kotlin
-To start, Kotlin is amazing and can see why people are switching over. I do wish I jumped into the language sooner but was intimidated and learning MVVM and Architectural Components (which I love). It is an easy language to dive into if the programmer has a solid OO experience. At this moment, I would suggest new developers to master Java before moving to Kotlin because it is easier to comprehend and write without any Android experience(which may change the more I use Kotlin). I look forward to building more applications with Kotlin in the future. 
+To start, Kotlin is amazing and can see why people are switching over. I do wish I jumped into the language sooner but was intimidated and learning MVVM and Architectural Components (which I love). It is an easy language to dive into if the programmer has a solid OO experience. At this moment, I would suggest new developers to master Java before moving to Kotlin because it is easier to comprehend and write without any Android experience(which may change the more I use Kotlin). I am happy to say that I am going to be using Kotlin from here on out. 
 
 ## Goal 
 - Get a solid understanding of Kotlin (note: so far it is amazing and I wish I converted earlier)
