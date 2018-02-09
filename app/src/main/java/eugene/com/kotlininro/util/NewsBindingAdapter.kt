@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 object NewsBindingAdapter {
@@ -21,7 +20,7 @@ object NewsBindingAdapter {
             imageView.visibility = View.GONE
             return
         }
-        Glide.with(imageView.context).load(imageReference)
+        GlideApp.with(imageView.context).load(imageReference)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView)
     }

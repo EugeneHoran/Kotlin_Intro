@@ -165,7 +165,7 @@ class NewsPagerFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, TabL
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
         }
-        toggle!!.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
+        toggle.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
         binding.appBar.setBackgroundColor(newsLogoAndColors.colorPrimary!!)
         binding.tabs.setSelectedTabIndicatorColor(newsLogoAndColors.colorAccent!!)
         binding.tabs.setTabTextColors(ColorUtils.setAlphaComponent(newsLogoAndColors.colorAccent!!, 180), newsLogoAndColors.colorAccent!!)
