@@ -53,6 +53,7 @@ class SelectorFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_selector, container, false)
         setSupportActionbar(binding.toolbar, false, addToPopBack)
+        
         return binding.root
     }
 
