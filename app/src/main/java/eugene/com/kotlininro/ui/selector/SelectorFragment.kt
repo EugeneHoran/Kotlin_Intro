@@ -1,10 +1,12 @@
 package eugene.com.kotlininro.ui.selector
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.util.Log
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.view.*
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentSelectorBinding
@@ -27,17 +29,25 @@ class SelectorFragment : BaseFragment() {
 
     private var addToPopBack: Boolean = false
     private lateinit var model: SelectorFragmentViewModel
-    private var adapter = SelectorRecyclerAdapter()
+    private lateinit var adapter: SelectorRecyclerAdapter
     private lateinit var binding: FragmentSelectorBinding
 
     override fun onCreateFrag(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
+        initStatus()
         if (arguments != null) {
             addToPopBack = arguments!!.getBoolean(ARGS_SHOW_NAVIGATION, false)
         }
+
         model = ViewModelProviders.of(this,
                 ViewModelFactory(SelectorFragmentViewModel(
                         NewsDatabase.getInstance(activity!!).getNewsDao())))[SelectorFragmentViewModel::class.java]
+        adapter = SelectorRecyclerAdapter(model)
+    }
+
+    @SuppressLint("NewApi")
+    private fun initStatus() {
+        if (isVersion21 && window != null) window!!.statusBarColor = ContextCompat.getColor(activity!!, R.color.colorPrimaryDark)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,6 +58,7 @@ class SelectorFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recycler.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         binding.recycler.adapter = adapter
         observeNewsSources(model)
     }
@@ -55,7 +66,6 @@ class SelectorFragment : BaseFragment() {
     private fun observeNewsSources(model: SelectorFragmentViewModel) {
         model.getNews().observe(this, Observer {
             if (it != null) {
-                Log.e("Testing", it.size.toString())
                 adapter.setItems(it)
             }
         })
@@ -67,17 +77,18 @@ class SelectorFragment : BaseFragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_continue -> {
                 listener!!.navToNewsFragment()
-                return true
+                true
             }
             android.R.id.home -> {
                 listener!!.navToNewsFragment()
+                true
             }
             else -> {
+                super.onOptionsItemSelected(item)
             }
         }
-        return super.onOptionsItemSelected(item)
     }
 }

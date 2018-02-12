@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="news"
             type="eugene.com.kotlininro.db.entities.NewsStation" />
+
+        <variable
+            name="holder"
+            type="eugene.com.kotlininro.ui.selector.SelectorRecyclerAdapter.UnselectedViewHolder" />
     </data>
 
-
-    <CheckBox
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:paddingLeft="12dp"
-        android:text="@{news.title, default = Testing}" />
+        android:layout_height="48dp"
+        android:onClick="@{() -> holder.itemClicked(news)}"
+        android:paddingLeft="@dimen/margin_16"
+        android:paddingRight="@dimen/margin_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@{news.title}"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:enabled="false"
+            tools:ignore="RtlHardcoded" />
+    </RelativeLayout>
 </layout>

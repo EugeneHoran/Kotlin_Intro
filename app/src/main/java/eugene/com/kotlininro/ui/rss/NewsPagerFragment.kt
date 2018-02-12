@@ -5,14 +5,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentNewsPagerBinding
 import eugene.com.kotlininro.db.NewsDatabase
@@ -37,9 +36,11 @@ class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, 
     private var page: Int = 0
     private var appBarIsExpanded = true
     private var logos: IntArray? = null
+    private var filterIcon: Drawable? = null
     internal var swipeRightOffset: Float = 0.toFloat()
 
     override fun onCreateFrag(savedInstanceState: Bundle?) {
+        setHasOptionsMenu(true)
         model = ViewModelProviders.of(this, ViewModelFactory(
                 NewsPagerFragmentViewModel(
                         NewsDatabase.getInstance(mainActivity!!)
@@ -72,6 +73,24 @@ class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, 
         outState.putInt(STATE_PAGER_PAGE, binding.pager.currentItem)
         outState.putBoolean(STATE_APP_BAR_EXPANDED, appBarIsExpanded)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_filter, menu)
+        filterIcon = menu.findItem(R.id.action_filter).icon
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_filter -> {
+                listener!!.navToSelectorFragment(true)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     /**
@@ -143,6 +162,7 @@ class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, 
     private fun initColorChange(newsLogoAndColors: NewsStationView) {
         if (isVersion21 && window != null) window!!.statusBarColor = newsLogoAndColors.colorPrimaryDark!!
         toggle!!.drawerArrowDrawable.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
+        filterIcon!!.mutate().setColorFilter(newsLogoAndColors.colorAccent!!, PorterDuff.Mode.MULTIPLY)
         binding.appBar.setBackgroundColor(newsLogoAndColors.colorPrimary!!)
         binding.tabs.setSelectedTabIndicatorColor(newsLogoAndColors.colorAccent!!)
         binding.tabs.setTabTextColors(ColorUtils.setAlphaComponent(newsLogoAndColors.colorAccent!!, 180), newsLogoAndColors.colorAccent!!)

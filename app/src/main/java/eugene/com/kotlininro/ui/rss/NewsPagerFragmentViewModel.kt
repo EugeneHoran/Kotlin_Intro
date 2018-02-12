@@ -12,7 +12,7 @@ class NewsPagerFragmentViewModel(newsDao: NewsDao) : ViewModel() {
     private val logos = MutableLiveData<IntArray>()
 
     init {
-        news.addSource(newsDao.getNews(), {
+        news.addSource(newsDao.getSelectedNews(), {
             setupData(it)
         })
     }

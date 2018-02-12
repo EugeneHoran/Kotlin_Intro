@@ -22,6 +22,15 @@ data class NewsStation(
     }
 
     @Ignore
+    constructor(station: NewsStation) : this(
+            id = station.id,
+            title = station.title,
+            url = station.url,
+            newsStationView = station.newsStationView,
+            show = station.show.not()
+    )
+
+    @Ignore
     constructor(
             title: String,
             url: String,
@@ -32,13 +41,13 @@ data class NewsStation(
             newsStationView = newsStationView,
             show = true)
 
-    @Ignore
-    constructor(newsStation: NewsStation) : this(
-            id = newsStation.id,
-            title = newsStation.title,
-            url = newsStation.url,
-            newsStationView = newsStation.newsStationView,
-            show = true)
+//    @Ignore
+//    constructor(newsStation: NewsStation) : this(
+//            id = newsStation.id,
+//            title = newsStation.title,
+//            url = newsStation.url,
+//            newsStationView = newsStation.newsStationView,
+//            show = true)
 
 
     /**

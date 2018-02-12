@@ -2,6 +2,7 @@ package eugene.com.kotlininro.util
 
 import android.databinding.BindingAdapter
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.support.v7.widget.CardView
 import android.text.TextUtils
 import android.view.View
@@ -45,7 +46,8 @@ object NewsBindingAdapter {
     @JvmStatic
     @BindingAdapter("tintColor")
     fun bindTintDrawable(imageView: ImageView, color: Int?) {
-        imageView.setColorFilter(color!!, PorterDuff.Mode.MULTIPLY)
+        imageView.drawable.mutate()
+        imageView.drawable.colorFilter = PorterDuffColorFilter(color!!, PorterDuff.Mode.MULTIPLY)
     }
 
     @JvmStatic
