@@ -17,11 +17,6 @@ data class NewsStation(
         var show: Boolean) : Parcelable {
 
     @Ignore
-    fun getViewType(): Int {
-        return if (show) 0 else 1
-    }
-
-    @Ignore
     constructor(station: NewsStation) : this(
             id = station.id,
             title = station.title,
@@ -41,14 +36,11 @@ data class NewsStation(
             newsStationView = newsStationView,
             show = true)
 
-//    @Ignore
-//    constructor(newsStation: NewsStation) : this(
-//            id = newsStation.id,
-//            title = newsStation.title,
-//            url = newsStation.url,
-//            newsStationView = newsStation.newsStationView,
-//            show = true)
 
+    @Ignore
+    fun getViewType(): Int {
+        return if (show) 0 else 1
+    }
 
     /**
      * Parcelable

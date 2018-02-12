@@ -9,14 +9,14 @@
             type="eugene.com.kotlininro.db.entities.NewsStation" />
 
         <variable
-            name="holder"
-            type="eugene.com.kotlininro.ui.selector.SelectorRecyclerAdapter.UnselectedViewHolder" />
+            name="model"
+            type="eugene.com.kotlininro.ui.selector.SelectorFragmentViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:onClick="@{() -> holder.itemClicked(news)}"
+        android:onClick="@{() -> model.itemClicked(news)}"
         android:paddingLeft="@dimen/margin_16"
         android:paddingRight="@dimen/margin_16">
 

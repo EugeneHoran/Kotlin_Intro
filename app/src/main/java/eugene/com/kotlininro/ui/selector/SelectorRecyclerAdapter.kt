@@ -51,28 +51,16 @@ class SelectorRecyclerAdapter(var model: SelectorFragmentViewModel) : RecyclerVi
     }
 
     class SelectedViewHolder(private var binding: RecyclerSelectorSelectedItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private lateinit var model: SelectorFragmentViewModel
         fun bindView(station: NewsStation, model: SelectorFragmentViewModel) {
-            this.model = model
             binding.news = station
-            binding.holder = this
-        }
-
-        fun itemClicked(station: NewsStation) {
-            model.itemClicked(station)
+            binding.model = model
         }
     }
 
     class UnselectedViewHolder(private var binding: RecyclerSelectorUnselectedItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private lateinit var model: SelectorFragmentViewModel
         fun bindView(station: NewsStation, model: SelectorFragmentViewModel) {
-            this.model = model
             binding.news = station
-            binding.holder = this
-        }
-
-        fun itemClicked(station: NewsStation) {
-            model.itemClicked(station)
+            binding.model = model
         }
     }
 }

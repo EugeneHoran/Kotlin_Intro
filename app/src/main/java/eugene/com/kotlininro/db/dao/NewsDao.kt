@@ -12,7 +12,6 @@ abstract class NewsDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     abstract fun update(newsStation: NewsStation)
 
-
     @Query("SELECT * FROM news_stations")
     abstract fun getNews(): LiveData<List<NewsStation>>
 

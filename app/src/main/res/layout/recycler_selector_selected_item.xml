@@ -9,8 +9,8 @@
             type="eugene.com.kotlininro.db.entities.NewsStation" />
 
         <variable
-            name="holder"
-            type="eugene.com.kotlininro.ui.selector.SelectorRecyclerAdapter.SelectedViewHolder" />
+            name="model"
+            type="eugene.com.kotlininro.ui.selector.SelectorFragmentViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:onClick="@{() -> holder.itemClicked(news)}">
+        android:onClick="@{() -> model.itemClicked(news)}">
 
         <RelativeLayout
             android:layout_width="match_parent"

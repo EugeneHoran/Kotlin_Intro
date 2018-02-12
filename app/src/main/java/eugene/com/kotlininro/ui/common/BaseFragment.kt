@@ -1,5 +1,6 @@
 package eugene.com.kotlininro.ui.common
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,11 @@ abstract class BaseFragment : Fragment() {
         mainActivity = activity as AppCompatActivity
         if (isVersion21) window = activity!!.window
         onCreateFrag(savedInstanceState)
+    }
+
+    @SuppressLint("NewApi")
+    fun initStatus() {
+        if (isVersion21 && window != null) window!!.statusBarColor = ContextCompat.getColor(activity!!, R.color.colorPrimaryDark)
     }
 
     /**
