@@ -3,7 +3,7 @@ package eugene.com.kotlininro.ui.common
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import eugene.com.kotlininro.R
-import eugene.com.kotlininro.ui.rss.NewsPagerFragment
+import eugene.com.kotlininro.ui.news.NewsPagerFragment
 import eugene.com.kotlininro.ui.selector.SelectorFragment
 
 class NavigationController(fragmentManager: FragmentManager, callback: Callbacks.NavigationControllerCallbacks) {

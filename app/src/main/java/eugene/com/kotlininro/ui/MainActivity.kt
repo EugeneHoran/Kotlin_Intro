@@ -15,7 +15,7 @@ import eugene.com.kotlininro.ui.common.NavigationController
 class MainActivity : AppCompatActivity(), Callbacks.NavigationControllerCallbacks, Callbacks.FragmentNavigationCallbacks {
     companion object {
         private const val STATE_FRAG_IN_POP_BACK = "state_frag_has_nav_icon"
-        private const val PREF_SHOW_SELECTOR = "prefs_show_selector_fragment"
+        private const val PREF_NAVIGATE_TO_SELECTOR = "prefs_show_selector_fragment"
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -26,10 +26,11 @@ class MainActivity : AppCompatActivity(), Callbacks.NavigationControllerCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         navController = NavigationController(supportFragmentManager, this)
         prefs = getPreferences(Context.MODE_PRIVATE)
         if (savedInstanceState == null) {
-            if (!prefs.getBoolean(PREF_SHOW_SELECTOR, false)) {
+            if (!prefs.getBoolean(PREF_NAVIGATE_TO_SELECTOR, false)) {
                 navToSelectorFragment(false)
             } else {
                 navToNewsFragment()
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity(), Callbacks.NavigationControllerCallback
 
     override fun navToNewsFragment() {
         prefs.edit {
-            putBoolean(PREF_SHOW_SELECTOR, true)
+            putBoolean(PREF_NAVIGATE_TO_SELECTOR, true)
         }
         navController.navToNewsFragment()
     }

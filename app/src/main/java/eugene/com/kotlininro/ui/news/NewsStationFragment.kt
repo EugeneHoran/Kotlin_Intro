@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.ui.rss
+package eugene.com.kotlininro.ui.news
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders

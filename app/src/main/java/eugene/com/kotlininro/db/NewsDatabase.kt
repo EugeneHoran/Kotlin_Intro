@@ -29,7 +29,8 @@ abstract class NewsDatabase : RoomDatabase() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     ioThread {
-                        getInstance(context).getNewsDao().insertNewsList(NewsDataGenerator().getInitNewsStationList())
+                        val nest = db as NewsDatabase
+                        nest.getNewsDao().insertNewsList(NewsDataGenerator().getInitNewsStationList())
                     }
                 }
             }).build()

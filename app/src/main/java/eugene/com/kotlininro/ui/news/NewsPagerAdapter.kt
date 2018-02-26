@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.ui.rss
+package eugene.com.kotlininro.ui.news
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

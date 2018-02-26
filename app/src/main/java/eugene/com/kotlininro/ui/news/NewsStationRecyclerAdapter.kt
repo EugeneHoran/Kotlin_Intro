@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.ui.rss
+package eugene.com.kotlininro.ui.news
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

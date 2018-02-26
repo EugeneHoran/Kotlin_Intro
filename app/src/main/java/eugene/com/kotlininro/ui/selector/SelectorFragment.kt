@@ -8,9 +8,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.view.*
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentSelectorBinding
-import eugene.com.kotlininro.db.NewsDatabase
 import eugene.com.kotlininro.ui.common.BaseFragment
-import eugene.com.kotlininro.util.ViewModelFactory
 
 
 class SelectorFragment : BaseFragment() {
@@ -36,9 +34,7 @@ class SelectorFragment : BaseFragment() {
         if (arguments != null) {
             addToPopBack = arguments!!.getBoolean(ARGS_SHOW_NAVIGATION, false)
         }
-        model = ViewModelProviders.of(this,
-                ViewModelFactory(SelectorFragmentViewModel(
-                        NewsDatabase.getInstance(activity!!).getNewsDao())))[SelectorFragmentViewModel::class.java]
+        model = ViewModelProviders.of(this)[SelectorFragmentViewModel::class.java]
         adapter = SelectorRecyclerAdapter(model)
     }
 

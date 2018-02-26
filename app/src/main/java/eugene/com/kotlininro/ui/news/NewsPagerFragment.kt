@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.ui.rss
+package eugene.com.kotlininro.ui.news
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
@@ -9,15 +9,14 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
+import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.ViewPager
 import android.view.*
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.FragmentNewsPagerBinding
-import eugene.com.kotlininro.db.NewsDatabase
 import eugene.com.kotlininro.db.entities.NewsStationView
 import eugene.com.kotlininro.ui.common.BaseFragment
-import eugene.com.kotlininro.util.ViewModelFactory
 
 class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, TabLayout.OnTabSelectedListener {
     companion object {
@@ -40,11 +39,9 @@ class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, 
     internal var swipeRightOffset: Float = 0.toFloat()
 
     override fun onCreateFrag(savedInstanceState: Bundle?) {
+        filterIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_filter_list)
         setHasOptionsMenu(true)
-        model = ViewModelProviders.of(this, ViewModelFactory(
-                NewsPagerFragmentViewModel(
-                        NewsDatabase.getInstance(mainActivity!!)
-                                .getNewsDao())))[NewsPagerFragmentViewModel::class.java]
+        model = ViewModelProviders.of(this)[NewsPagerFragmentViewModel::class.java]
         newsPagerHelper = NewsPagerFragmentHelper()
         adapter = NewsPagerAdapter(childFragmentManager)
         if (savedInstanceState != null) {
@@ -77,7 +74,7 @@ class NewsPagerFragment : BaseFragment(), AppBarLayout.OnOffsetChangedListener, 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_filter, menu)
-        filterIcon = menu.findItem(R.id.action_filter).icon
+        menu.findItem(R.id.action_filter).icon = filterIcon
         super.onCreateOptionsMenu(menu, inflater)
     }
 

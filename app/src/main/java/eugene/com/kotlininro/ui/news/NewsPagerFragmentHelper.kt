@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.ui.rss
+package eugene.com.kotlininro.ui.news
 
 import android.animation.ArgbEvaluator
 import eugene.com.kotlininro.db.entities.NewsStation
