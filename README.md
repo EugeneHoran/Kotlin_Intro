@@ -1,7 +1,7 @@
 # Kotlin_Intro
 First Kotlin project!!!
 
-Note: I am leaving out DI & Rx to learn the core fundementals. My next project will add DI &Rx as needed. 
+Note: I am now adding DI & Rx. I wanted to learn the core fundementals before I jumped into the helpers.
 
 ## Opinion about Kotlin
 To start, Kotlin is amazing and can see why people are switching over. I do wish I jumped into the language sooner but was intimidated and learning MVVM and Architectural Components (which I love). It is an easy language to dive into if the programmer has a solid OO experience. At this moment, I would suggest new developers to master Java before moving to Kotlin because it is easier to comprehend and write without any Android experience(which may change the more I use Kotlin). I am happy to say that I am going to be using Kotlin from here on out. 
@@ -18,6 +18,8 @@ Kotlin Stages:
   - Unit Test with Kotlin
 - ~~UI and Data Handling (data binding with Arch Components)~~
   - ~~ViewModels, Fragmentation, RecyclerAdapters...~~
+  - Dependency Injection (Dagger)
+  - RxJava
 
 
 <p float="top">
