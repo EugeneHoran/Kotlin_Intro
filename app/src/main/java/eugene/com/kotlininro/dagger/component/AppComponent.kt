@@ -10,7 +10,10 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [ApiModule::class, RoomModule::class])
+@Component(modules = [
+    ApiModule::class,
+    RoomModule::class
+])
 interface AppComponent {
     fun inject(newsPagerFragmentViewModel: NewsPagerFragmentViewModel)
     fun inject(newsStationFragmentViewModel: NewsStationFragmentViewModel)

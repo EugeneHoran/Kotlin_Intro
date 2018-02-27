@@ -15,6 +15,7 @@ class NewsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        
         graph = DaggerAppComponent.builder()
                 .apiModule(ApiModule())
                 .roomModule(RoomModule(this))
