@@ -18,8 +18,8 @@ Kotlin Stages:
   - Unit Test with Kotlin
 - ~~UI and Data Handling (data binding with Arch Components)~~
   - ~~ViewModels, Fragmentation, RecyclerAdapters...~~
-  - Dependency Injection (Dagger)
-  - RxJava
+- ~~Dependency Injection (Dagger)~~
+- RxJava
 
 
 <p float="top">
