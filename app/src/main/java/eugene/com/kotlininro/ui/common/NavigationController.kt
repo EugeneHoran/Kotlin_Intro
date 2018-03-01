@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentTransaction
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.ui.news.NewsPagerFragment
 import eugene.com.kotlininro.ui.selector.SelectorFragment
+import javax.inject.Inject
 
-class NavigationController(fragmentManager: FragmentManager, callback: Callbacks.NavigationControllerCallbacks) {
+
+class NavigationController @Inject constructor(fragmentManager: FragmentManager, callback: Callbacks.NavigationControllerCallbacks) {
     private var fm: FragmentManager = fragmentManager
     private var listener: Callbacks.NavigationControllerCallbacks = callback
     private var container: Int = R.id.container

@@ -3,8 +3,7 @@ package eugene.com.kotlininro
 import android.app.Application
 import eugene.com.kotlininro.dagger.component.AppComponent
 import eugene.com.kotlininro.dagger.component.DaggerAppComponent
-import eugene.com.kotlininro.dagger.module.ApiModule
-import eugene.com.kotlininro.dagger.module.RoomModule
+import eugene.com.kotlininro.dagger.module.ContextModule
 
 class NewsApplication : Application() {
 
@@ -15,10 +14,8 @@ class NewsApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        
         graph = DaggerAppComponent.builder()
-                .apiModule(ApiModule())
-                .roomModule(RoomModule(this))
+                .contextModule(ContextModule(this))
                 .build()
     }
 }

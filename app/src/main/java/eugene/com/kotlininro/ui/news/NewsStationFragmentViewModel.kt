@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import eugene.com.kotlininro.NewsApplication
 import eugene.com.kotlininro.api.NewsApi
 import eugene.com.kotlininro.db.entities.NewsStation
@@ -21,6 +22,7 @@ class NewsStationFragmentViewModel(newsStation: NewsStation) : ViewModel() {
     init {
         NewsApplication.graph.inject(this)
         loading.value = true
+        Log.e("Testing", "api " + newsApi)
         news.addSource(newsApi.getNews(newsStation.url), {
             loading.value = false
             news.value = it

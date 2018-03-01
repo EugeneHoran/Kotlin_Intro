@@ -1,4 +1,4 @@
-package eugene.com.kotlininro.kotlin
+package eugene.com.kotlininro.util
 
 import android.content.SharedPreferences
 

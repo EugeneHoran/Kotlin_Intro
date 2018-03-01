@@ -8,11 +8,12 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import eugene.com.kotlininro.R
 import eugene.com.kotlininro.databinding.ActivityMainBinding
-import eugene.com.kotlininro.kotlin.edit
 import eugene.com.kotlininro.ui.common.Callbacks
 import eugene.com.kotlininro.ui.common.NavigationController
+import eugene.com.kotlininro.util.edit
 
 class MainActivity : AppCompatActivity(), Callbacks.NavigationControllerCallbacks, Callbacks.FragmentNavigationCallbacks {
+
     companion object {
         private const val STATE_FRAG_IN_POP_BACK = "state_frag_has_nav_icon"
         private const val PREF_NAVIGATE_TO_SELECTOR = "prefs_show_selector_fragment"
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity(), Callbacks.NavigationControllerCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         navController = NavigationController(supportFragmentManager, this)
         prefs = getPreferences(Context.MODE_PRIVATE)
         if (savedInstanceState == null) {
